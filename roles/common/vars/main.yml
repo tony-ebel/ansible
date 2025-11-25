@@ -1,6 +1,6 @@
 ssh_keys:
   - user: tony
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIErvkoLSLrKQhq2WOn+8w3Wh6FUpJcvFCWkPr6lSecuV tony@tonypi"
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKk3IPhJ7TSo5aWUo7Gnyk1j7rq+WVmF0PqkTqjQV5sp tony@tonypi"
   - user: tony
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJK/xYoZRkL3y2mZ9BIABazhPNisauF05dEBNIoDrm7i tony@tWindows"
   - user: tony
