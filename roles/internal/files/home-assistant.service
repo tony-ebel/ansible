@@ -1,0 +1,25 @@
+[Unit]
+After=docker.service network-online.target
+Wants=network-online.target
+Requires=docker.service network-online.target
+
+[Service]
+ExecStartPre=/bin/sh -c 'until ping -c1 tonyebel.com; do sleep 1; done;'
+ExecStartPre=/usr/bin/docker pull ghcr.io/home-assistant/home-assistant:stable
+ExecStartPre=-/usr/bin/docker rm -fv %p
+ExecStart=/usr/bin/docker run \
+                          --name home-assistant \
+                          --env TZ=America/Chicago \
+                          --privileged \
+                          --net host \
+                          --volume /etc/home-assistant/config:/config \
+                          --volume /run/dbus:/run/dbus:ro \
+                          ghcr.io/home-assistant/home-assistant:stable
+ExecStop=/usr/bin/docker stop %p
+Restart=always
+RestartSec=30
+TimeoutStartSec=900
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target

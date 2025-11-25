@@ -1,0 +1,20 @@
+[Unit]
+After=docker.service network-online.target
+Wants=network-online.target
+Requires=docker.service network-online.target
+
+[Service]
+Environment="TZ=America/Chicago"
+ExecStartPre=/bin/sh -c 'until ping -c1 tonyebel.com; do sleep 1; done;'
+ExecStartPre=/usr/bin/docker pull pihole/pihole:latest
+ExecStartPre=-/usr/bin/docker rm -fv %p
+ExecStart=/usr/bin/docker run \
+                          --name pihole \
+                          --env TZ=America/Chicago \
+                          --net host \
+                          --volume /etc/pihole/:/etc/pihole/ \
+                          pihole/pihole:latest
+ExecStop=/usr/bin/docker stop %p
+
+[Install]
+WantedBy=multi-user.target
