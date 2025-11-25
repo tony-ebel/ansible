@@ -3,7 +3,7 @@
     src: "{{ item }}.service"
     dest: "/etc/systemd/system/{{ item }}.service"
     mode: "0644"
-  nofity: "{{ item }}-restart"
+  notify: "{{ item }}-restart"
   loop:
     - pihole
     - home-assistant
