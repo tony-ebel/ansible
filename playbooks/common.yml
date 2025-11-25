@@ -1,3 +1,4 @@
 - hosts: common
+  become: true
   roles:
     - common
