@@ -18,3 +18,13 @@
     state: present
     regexp: "^tony"
     line: "tony    ALL = (ALL) NOPASSWD:ALL"
+
+- name: Configure SSHD Hardening
+  lineinfile:
+    path: "/etc/ssh/sshd_config"
+    regex: "^(#)?{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
+    state: present
+  loop:
+    - { key: "PermitEmptyPasswords", value: "no" }
+    - { key: "PasswordAuthentication", value: "no" }

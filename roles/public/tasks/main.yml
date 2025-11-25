@@ -12,16 +12,6 @@
     key: "{{ item }}"
   loop: "{{ tunnel_ssh_keys }}"
 
-- name: Configure SSHD Hardening
-  lineinfile:
-    path: "/etc/ssh/sshd_config"
-    regex: "^(#)?{{ item.key }}"
-    line: "{{ item.key }} {{ item.value }}"
-    state: present
-  loop:
-    - { key: "PermitEmptyPasswords", value: "no" }
-    - { key: "PasswordAuthentication", value: "no" }
-
 - name: Configure SSHD for Tunneling
   lineinfile:
     path: "/etc/ssh/sshd_config"
