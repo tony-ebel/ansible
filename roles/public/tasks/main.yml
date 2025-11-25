@@ -3,7 +3,7 @@
     name: tunnel
     create_home: true
     state: present
-    shell: /usr/bin/nologin
+    shell: /usr/sbin/nologin
 
 - name: Tunnel SSH Keys
   ansible.posix.authorized_key:
