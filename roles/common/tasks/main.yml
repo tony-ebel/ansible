@@ -28,3 +28,4 @@
   loop:
     - { key: "PermitEmptyPasswords", value: "no" }
     - { key: "PasswordAuthentication", value: "no" }
+  notify: sshd-restart
