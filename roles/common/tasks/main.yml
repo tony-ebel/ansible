@@ -1,6 +1,7 @@
 - name: Tony User
   ansible.builtin.user:
     name: tony
+    append: true
     create_home: true
     password: "{{ tony_passwd_hash }}"
     state: present
