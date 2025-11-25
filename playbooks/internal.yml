@@ -1,0 +1,4 @@
+- hosts: internal
+  become: true
+  roles:
+    - internal
