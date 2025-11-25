@@ -1,0 +1,20 @@
+- name: Tony User
+  ansible.builtin.user:
+    name: tony
+    create_home: true
+    state: present
+    shell: /bin/bash
+
+- name: Tony SSH Keys
+  ansible.posix.authorized_key:
+    user: "{{ item.user }}"
+    state: present
+    key: "{{ item.key }}"
+  loop: "{{ ssh_keys }}"
+
+- name: Tony Nopasswd
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^%tony"
+    line: "%tony ALL = (ALL) NOPASSWD:ALL"

@@ -1,0 +1,35 @@
+- name: Tunnel User
+  ansible.builtin.user:
+    name: tunnel
+    create_home: true
+    state: present
+    shell: /usr/bin/nologin
+
+- name: Tunnel SSH Keys
+  ansible.posix.authorized_key:
+    user: tunnel
+    state: present
+    key: "{{ item }}"
+  loop: "{{ tunnel_ssh_keys }}"
+
+- name: Configure SSHD Hardening
+  lineinfile:
+    path: "/etc/ssh/sshd_config"
+    regex: "^(#)?{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
+    state: present
+  loop:
+    - { key: "PermitEmptyPasswords", value: "no" }
+    - { key: "PasswordAuthentication", value: "no" }
+
+- name: Configure SSHD for Tunneling
+  lineinfile:
+    path: "/etc/ssh/sshd_config"
+    regex: "^{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
+    state: present
+  loop:
+    - { key: "PubkeyAuthentication", value: "yes" }
+    - { key: "ClientAliveInterval", value: "30" }
+    - { key: "ClientAliveCountMax", value: "2" }
+    - { key: "GatewayPorts", value: "clientspecified" }
