@@ -2,6 +2,7 @@
   ansible.builtin.user:
     name: tony
     create_home: true
+    password: "{{ tony_passwd_hash }}"
     state: present
     shell: /bin/bash
 
