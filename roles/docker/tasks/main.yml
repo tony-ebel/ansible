@@ -1,4 +1,8 @@
 ---
+- name: Set custom arch variable
+  set_fact:
+    arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+
 - name: Install required dependencies
   ansible.builtin.apt:
     name:
@@ -17,7 +21,7 @@
 
 - name: Setup stable docker apt repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
     state: present
     filename: docker.list
 
