@@ -1,0 +1,12 @@
+---
+- name: Upgrade System Packages
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update cache and full distrubution upgrade (apt)
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: dist
+        autoremove: yes
+      when: ansible_pkg_mgr == 'apt'
