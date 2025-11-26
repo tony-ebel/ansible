@@ -7,3 +7,5 @@ ssh_keys:
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJv6ykyhWC5larhlxhicBv0zZs5bQlcbxtczJO/dtCtT tony@tBeelink"
   - user: tony
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMrf6OgocsPO9nNRdZZ8RLHC8Dd9PmDE9cgf4KCXxqMx tony@tCachy"
+  - user: tony
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGjjuhvfa0FEBJI8oUG80W4/6i3rE4rzPvNJH3jP6mD8 tony@PROBOOK-2009"
