@@ -1,18 +1,18 @@
-- name: Tunnel User
+- name: tunnel user
   ansible.builtin.user:
     name: tunnel
     create_home: true
     state: present
     shell: /usr/sbin/nologin
 
-- name: Tunnel SSH Keys
+- name: tunnel ssh keys
   ansible.posix.authorized_key:
     user: tunnel
     state: present
     key: "{{ item }}"
   loop: "{{ tunnel_ssh_keys }}"
 
-- name: Configure SSHD for Tunneling
+- name: configure sshd for tunneling
   lineinfile:
     path: "/etc/ssh/sshd_config"
     regex: "^{{ item.key }}"

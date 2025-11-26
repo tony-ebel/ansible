@@ -1,4 +1,4 @@
-- name: Tony User
+- name: tony user
   ansible.builtin.user:
     name: tony
     create_home: true
@@ -6,21 +6,21 @@
     state: present
     shell: /bin/bash
 
-- name: Tony SSH Keys
+- name: tony ssh keys
   ansible.posix.authorized_key:
     user: "{{ item.user }}"
     state: present
     key: "{{ item.key }}"
   loop: "{{ ssh_keys }}"
 
-- name: Tony Nopasswd
+- name: tony nopasswd
   lineinfile:
     dest: /etc/sudoers
     state: present
     regexp: "^tony"
     line: "tony    ALL = (ALL) NOPASSWD:ALL"
 
-- name: Configure SSHD Hardening
+- name: configure sshd hardening
   lineinfile:
     path: "/etc/ssh/sshd_config"
     regex: "^(#)?{{ item.key }}"

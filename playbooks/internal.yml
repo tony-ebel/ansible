@@ -1,4 +1,6 @@
+---
 - hosts: internal
   become: true
+  gather_facts: false
   roles:
     - internal

@@ -1,4 +1,6 @@
+---
 - hosts: public
   become: true
+  gather_facts: false
   roles:
     - public

@@ -18,7 +18,7 @@
     - pihole
     - home-assistant
 
-- name: Pull latest docker images
+- name: pull latest docker images
   community.docker.docker_image:
     name: "{{ item.image }}"
     source: pull
