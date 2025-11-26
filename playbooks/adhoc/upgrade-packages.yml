@@ -4,6 +4,12 @@
   become: true
 
   tasks:
+    - name: Install python3-apt
+      ansible.builtin.apt:
+        update_cache: yes
+        name: python3-apt
+        state: present
+
     - name: Update cache and full distrubution upgrade (apt)
       ansible.builtin.apt:
         update_cache: yes
