@@ -20,6 +20,11 @@
     regexp: "^tony"
     line: "tony    ALL = (ALL) NOPASSWD:ALL"
 
+- name: tony ssh_config
+  ansible.builtin.template:
+    src: ssh_config.j2
+    dest: /home/tony/.ssh/config
+
 - name: configure sshd hardening
   lineinfile:
     path: "/etc/ssh/sshd_config"
