@@ -4,11 +4,6 @@
   gather_facts: false
 
   tasks:
-    - name: common playbook
-      ansible.builtin.include_playbook: playbooks/common.yml
-
-    - name: public playbook
-      ansible.builtin.include_playbook: playbooks/public.yml
-
-    - name: internal playbook
-      ansible.builtin.include_playbook: playbooks/internal.yml
+    - ansible.builtin.include_playbook: playbooks/common.yml
+    - ansible.builtin.include_playbook: playbooks/public.yml
+    - ansible.builtin.include_playbook: playbooks/internal.yml
