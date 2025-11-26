@@ -4,25 +4,25 @@ Host *
 Host home.tonyebel.com
   User tony
 
-{-% if inventory_hostname != "tonypi" %}
+{%- if inventory_hostname != "tonypi" %}
 
 Host tonypi
   Hostname 192.168.1.83
 {% endif %}
 
-{-% if inventory_hostname != "tbeelink" %}
+{%- if inventory_hostname != "tbeelink" %}
 
 Host tbeelink
   HostName 192.168.1.163
 {% endif %}
 
-{-% if inventory_hostname != "tcachy" %}
+{%- if inventory_hostname != "tcachy" %}
 
 Host tcachy
   HostName 192.168.1.80
 {% endif %}
 
-{-% if inventory_hostname != "chadpi" %}
+{%- if inventory_hostname != "chadpi" %}
 
 Host chadpi
 {% if inventory_hostname != "tbeelink" %}
@@ -32,7 +32,7 @@ Host chadpi
   Port 9005
 {% endif %}
 
-{-% if inventory_hostname != "probook" %}
+{%- if inventory_hostname != "probook" %}
 
 Host probook
 {% if inventory_hostname != "tbeelink" %}
