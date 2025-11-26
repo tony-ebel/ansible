@@ -1,9 +1,4 @@
 ---
-- name: run all playbooks
-  hosts: all
-  gather_facts: false
-
-  tasks:
-    - ansible.builtin.include_playbook: playbooks/common.yml
-    - ansible.builtin.include_playbook: playbooks/public.yml
-    - ansible.builtin.include_playbook: playbooks/internal.yml
+- import_playbook: playbooks/common.yml
+- import_playbook: playbooks/public.yml
+- import_playbook: playbooks/internal.yml
