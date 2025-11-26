@@ -1,3 +1,4 @@
+---
 - name: tony user
   ansible.builtin.user:
     name: tony

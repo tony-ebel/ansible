@@ -1,3 +1,4 @@
+---
 - name: "{{ item }}-restart"
   ansible.builtin.service:
     name: "{{ item }}"

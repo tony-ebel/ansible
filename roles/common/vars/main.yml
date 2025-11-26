@@ -1,3 +1,4 @@
+---
 ssh_keys:
   - user: tony
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKk3IPhJ7TSo5aWUo7Gnyk1j7rq+WVmF0PqkTqjQV5sp tony@tonypi"
