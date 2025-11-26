@@ -1,0 +1,8 @@
+[Unit]
+Description=remove dangling docker images and volumes
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=-/usr/bin/docker system prune -a -f --volumes

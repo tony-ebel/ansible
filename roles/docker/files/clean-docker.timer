@@ -1,0 +1,9 @@
+[Unit]
+Description=timer to clean docker stuff on a regular basis
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target

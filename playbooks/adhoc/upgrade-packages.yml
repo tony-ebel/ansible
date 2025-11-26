@@ -6,7 +6,7 @@
   tasks:
     - name: Update cache and full distrubution upgrade (apt)
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
         upgrade: dist
-        autoremove: yes
+        autoremove: true
       when: ansible_pkg_mgr == 'apt'
