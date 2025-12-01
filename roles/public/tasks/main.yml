@@ -25,3 +25,42 @@
     - { key: "ClientAliveCountMax", value: "2" }
     - { key: "GatewayPorts", value: "clientspecified" }
   notify: sshd-restart
+
+- name: install nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+  notify: nginx-start
+
+- name: main nginx conf
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: nginx-reload
+
+- name: nginx sites-available
+  ansible.buildin.copy:
+    src: "{{ item }}"
+    dest: "/etc/nginx/sites-available/{{ item }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: nginx-reload
+  loop: "{{ nginx_sites }}"
+
+- name: nginx sites-enabled
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/{{ item }}"
+    dest: "/etc/nginx/sites-enabled/{{ item }}"
+    state: link
+  notify: nginx-reload
+  loop: "{{ nginx_sites }}"
+
+- name: nginx verify config
+  ansible.builtin.command: nginx -t
+  changed_when: false
+  failed_when: "'test failed' in nginx_test_output.stderr"
+  register: nginx_test_output
