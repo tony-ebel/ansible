@@ -30,15 +30,9 @@
     state: reloaded
   listen: nginx-reload
 
-- name: portfolio-start
-  ansible.builtin.systemd_service:
-    name: portfolio
-    state: started
-    enabled: true
-    daemon_reload: true
-
 - name: portfolio-restart
   ansible.builtin.systemd_service:
     name: portfolio
     state: restarted
+    enabled: true
     daemon_reload: true

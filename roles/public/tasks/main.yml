@@ -112,7 +112,7 @@
     clone: true
     update: true
     accept_hostkey: true
-  notify: portfolio-start
+  notify: portfolio-restart
 
 - name: portfolio systemd service
   ansible.builtin.copy:
