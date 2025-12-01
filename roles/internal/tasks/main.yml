@@ -25,6 +25,7 @@
     tag: "{{ item.tag }}"
     source: pull
     state: present
+    force_source: true
   loop:
     - { service: pihole, image: pihole/pihole, tag: latest }
     - { service: home-assistant, image: ghcr.io/home-assistant/home-assistant, tag: stable }
