@@ -35,6 +35,8 @@
       - python3-certbot-nginx
     state: present
   notify: nginx-start
+  tags:
+    - certbot-setup
 
 - name: main nginx conf
   ansible.builtin.copy:
@@ -44,6 +46,8 @@
     group: root
     mode: "0644"
   notify: nginx-reload
+  tags:
+    - certbot-setup
 
 - name: register certbot
   shell: |
@@ -51,6 +55,8 @@
     touch /etc/letsencrypt/.registered
   args:
     creates: /etc/letsencrypt/.registered
+  tags:
+    - certbot-setup
 
 - name: nginx sites-available
   ansible.builtin.copy:
@@ -79,15 +85,21 @@
     - certbot.service
     - certbot.timer
   notify: certbot-timer-restart
+  tags:
+    - certbot-setup
 
 - name: enable certbot.timer
   ansible.builtin.systemd_service:
     name: certbot.timer
     state: started
     enabled: true
+  tags:
+    - certbot-setup
 
 - name: certbot get certificates
   command: "/usr/bin/certbot -n --nginx certonly -d {{ item }}"
   args:
     creates: "/etc/letsencrypt/live/{{ item }}"
   loop: "{{ nginx_sites }}"
+  tags:
+    - certbot-setup
