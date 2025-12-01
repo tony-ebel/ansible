@@ -42,7 +42,7 @@
   notify: nginx-reload
 
 - name: nginx sites-available
-  ansible.buildin.copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "/etc/nginx/sites-available/{{ item }}"
     owner: root
