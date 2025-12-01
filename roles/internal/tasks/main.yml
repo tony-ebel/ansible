@@ -29,4 +29,11 @@
   loop:
     - { service: pihole, image: pihole/pihole, tag: latest }
     - { service: home-assistant, image: ghcr.io/home-assistant/home-assistant, tag: stable }
-  notify: "{{ item.service }}-restart"
+  register: docker_pull_results
+
+- name: restart systemd services if new images
+  meta: noop
+  loop: "{{ docker_pull_results.results }}"
+  when: item.changed
+  changed_when: true
+  notify: "{{ item.item.service }}-restart"
