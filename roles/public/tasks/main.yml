@@ -58,9 +58,3 @@
     state: link
   notify: nginx-reload
   loop: "{{ nginx_sites }}"
-
-- name: nginx verify config
-  ansible.builtin.command: nginx -t
-  changed_when: false
-  failed_when: "'test failed' in nginx_test_output.stderr"
-  register: nginx_test_output

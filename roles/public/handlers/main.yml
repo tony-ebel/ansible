@@ -10,7 +10,15 @@
     state: started
     enabled: true
 
-- name: nginx-reload
+- name: nginx-verify-config
+  ansible.builtin.command: nginx -t
+  changed_when: false
+  failed_when: "'test failed' in nginx_test_output.stderr"
+  register: nginx_test_output
+  listen: nginx-reload
+
+- name: nginx-reload-service
   ansible.builtin.systemd_service:
     name: nginx
     state: reloaded
+  listen: nginx-reload
