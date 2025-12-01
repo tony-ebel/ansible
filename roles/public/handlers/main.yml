@@ -15,6 +15,7 @@
     name: nginx
     state: started
     enabled: true
+    daemon_reload: true
 
 - name: nginx-verify-config
   ansible.builtin.command: nginx -t
@@ -28,3 +29,10 @@
     name: nginx
     state: reloaded
   listen: nginx-reload
+
+- name: portfolio-restart
+  ansible.builtin.systemd_service:
+    name: portfolio
+    state: started
+    enabled: true
+    daemon_reload: true

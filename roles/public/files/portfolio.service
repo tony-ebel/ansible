@@ -1,0 +1,22 @@
+[Unit]
+Description=tonyebel.com portfolio website
+After=docker.service network-online.target
+Requires=docker.service network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/tonyebel-portfolio/
+ExecStartPre=/usr/bin/docker build -t portfolio:latest .
+ExecStartPre=-/usr/bin/docker rm -fv %p
+ExecStart=/usr/bin/docker run \
+                          --name %p \
+                          --rm \
+                          -e ENVIRONMENT=prod \
+                          -p 8500:8500 \
+                          portfolio:latest
+
+ExecStop=/usr/bin/docker stop %p
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target

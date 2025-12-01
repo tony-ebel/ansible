@@ -103,3 +103,20 @@
   loop: "{{ nginx_sites }}"
   tags:
     - certbot-setup
+
+- name: tonyebel-portfolio repo
+  ansible.builtin.git:
+    repo: "git@github.com:tony-ebel/tonyebel-portfolio.git"
+    dest: /opt/tonyebel-portfolio
+    version: main
+    clone: true
+    update: true
+    accept_hostkey: true
+  notify: portfolio-restart
+
+- name: portfolio systemd service
+  ansible.builtin.copy:
+    src: portfolio.service
+    dest: /etc/systemd/system/portfolio.service
+    mode: "0644"
+  notify: portfolio-restart
