@@ -26,9 +26,13 @@
     - { key: "GatewayPorts", value: "clientspecified" }
   notify: sshd-restart
 
-- name: install nginx
+- name: install nginx and certbot
   ansible.builtin.apt:
-    name: nginx
+    name:
+      - nginx
+      - certbot
+      - python3-certbot
+      - python3-certbot-nginx
     state: present
   notify: nginx-start
 
@@ -40,6 +44,13 @@
     group: root
     mode: "0644"
   notify: nginx-reload
+
+- name: register certbot
+  shell: |
+    certbot -n register --agree-tos --email tonyebel123@gmail.com
+    touch /etc/letsencrypt/.registered
+  args:
+    creates: /etc/letsencrypt/.registered
 
 - name: nginx sites-available
   ansible.builtin.copy:
@@ -57,4 +68,26 @@
     dest: "/etc/nginx/sites-enabled/{{ item }}"
     state: link
   notify: nginx-reload
+  loop: "{{ nginx_sites }}"
+
+- name: certbot systemd service
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/lib/systemd/system/{{ item }}"
+    mode: "0644"
+  loop:
+    - certbot.service
+    - certbot.timer
+  notify: certbot-timer-restart
+
+- name: enable certbot.timer
+  ansible.builtin.systemd_service:
+    name: certbot.timer
+    state: started
+    enabled: true
+
+- name: certbot get certificates
+  command: "/usr/bin/certbot -n --nginx certonly -d {{ item }}"
+  args:
+    creates: "/etc/letsencrypt/live/{{ item }}"
   loop: "{{ nginx_sites }}"

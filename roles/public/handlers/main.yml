@@ -4,6 +4,12 @@
     name: sshd
     state: restarted
 
+- name: certbot-timer-restart
+  ansible.builtin.systemd_service:
+    name: certbot.timer
+    state: restarted
+    daemon_reload: true
+
 - name: nginx-start
   ansible.builtin.systemd_service:
     name: nginx
