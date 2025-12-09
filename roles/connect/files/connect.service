@@ -1,0 +1,17 @@
+[Unit]
+Description=Connect SSH Service
+After=network-online.target
+Requires=network-online.target
+AssertPathExists=/root/connect.sh
+
+[Service]
+Type=simple
+ExecStart=/root/connect.sh
+
+Restart=always
+RestartSec=10
+KillMode=process
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
