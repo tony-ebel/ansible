@@ -9,6 +9,6 @@
 - name: connect systemd service
   ansible.builtin.copy:
     src: connect.service
-    dest: /etc/systemd/systemd/connect.service
+    dest: /etc/systemd/system/connect.service
     mode: "0644"
   notify: connect-restart
