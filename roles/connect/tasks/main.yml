@@ -5,6 +5,7 @@
     dest: /root/connect.sh
     owner: root
     mode: "0744"
+  notify: connect-restart
 
 - name: connect systemd service
   ansible.builtin.copy:
