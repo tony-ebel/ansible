@@ -3,3 +3,4 @@
 - import_playbook: playbooks/docker.yml
 - import_playbook: playbooks/public.yml
 - import_playbook: playbooks/internal.yml
+- import_playbook: playbooks/connect.yml

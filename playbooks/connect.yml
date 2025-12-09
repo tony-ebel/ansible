@@ -1,0 +1,6 @@
+---
+- hosts: connect
+  become: true
+  gather_facts: false
+  roles:
+    - connect
