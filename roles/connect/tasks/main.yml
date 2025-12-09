@@ -1,0 +1,14 @@
+---
+- name: connect.sh
+  ansible.builtin.template:
+    src: connect.j2
+    dest: /root/connect.sh
+    owner: root
+    mode: "0744"
+
+- name: connect systemd service
+  ansible.builtin.copy:
+    src: connect.service
+    dest: /etc/systemd/systemd/connect.service
+    mode: "0644"
+  notify: connect-restart

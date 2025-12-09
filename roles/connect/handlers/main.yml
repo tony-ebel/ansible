@@ -1,0 +1,7 @@
+---
+- name: connect-restart
+  ansible.builtin.systemd_service:
+    name: connect
+    state: restarted
+    enabled: "{{ enabled }}"
+    daemon_reload: true

@@ -8,6 +8,7 @@
   ansible.builtin.systemd_service:
     name: certbot.timer
     state: restarted
+    enabled: true
     daemon_reload: true
 
 - name: nginx-start
