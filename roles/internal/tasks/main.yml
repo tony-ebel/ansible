@@ -8,15 +8,3 @@
   loop:
     - pihole
     - home-assistant
-
-- name: pull latest docker images
-  community.docker.docker_image:
-    name: "{{ item.image }}"
-    tag: "{{ item.tag }}"
-    source: pull
-    state: present
-    force_source: true
-  loop:
-    - { service: pihole, image: pihole/pihole, tag: latest }
-    - { service: home-assistant, image: ghcr.io/home-assistant/home-assistant, tag: stable }
-  notify: "{{ item.service }}-restart"

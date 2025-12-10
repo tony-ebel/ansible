@@ -1,0 +1,32 @@
+---
+- name: Pull Internal Images
+  hosts: internal
+  become: true
+
+  tasks:
+  - name: pull latest docker images
+    community.docker.docker_image:
+      name: "{{ item.image }}"
+      tag: "{{ item.tag }}"
+      source: pull
+      state: present
+      force_source: true
+    loop:
+      - { service: pihole, image: pihole/pihole, tag: latest }
+      - { service: home-assistant, image: ghcr.io/home-assistant/home-assistant, tag: stable }
+    notify: "{{ item.service }}-restart"
+
+  handlers:
+    - name: "pihole-restart"
+      ansible.builtin.systemd_service:
+        name: pihole
+        state: restarted
+        enabled: true
+        daemon_reload: true
+
+    - name: "home-assistant-restart"
+      ansible.builtin.systemd_service:
+        name: home-assistant
+        state: restarted
+        enabled: true
+        daemon_reload: true
