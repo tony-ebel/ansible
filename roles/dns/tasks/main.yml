@@ -2,7 +2,7 @@
 - name: ensure dig installed
   ansible.builtin.apt:
     name:
-      - dnsutils
+      - bind9-dnsutils
     state: present
 
 - name: dns scripts
