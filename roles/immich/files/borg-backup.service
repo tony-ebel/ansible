@@ -1,0 +1,8 @@
+[Unit]
+Description=Backup Immich with Borg
+After=immich.service docker.service
+Requires=immich.service docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/etc/immich/borg-backup.sh

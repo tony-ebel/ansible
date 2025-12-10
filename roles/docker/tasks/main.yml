@@ -57,4 +57,4 @@
   loop:
     - clean-docker.service
     - clean-docker.timer
-  notify: clean-docker-timer-restart
+  notify: clean-docker-restart

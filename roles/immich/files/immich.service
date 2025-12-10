@@ -1,0 +1,15 @@
+[Unit]
+Description=Immich Services
+After=docker.service
+Requires=docker.service
+AssertPathExists=/etc/immich/docker-compose.yml
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+WorkingDirectory=/etc/immich/
+ExecStart=/usr/bin/docker compose up --force-recreate
+ExecStop=/usr/bin/docker compose down
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=timer to run borg-backup
+
+[Timer]
+OnCalendar=*-*-* 03:45:00
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target

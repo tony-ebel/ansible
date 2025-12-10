@@ -1,7 +1,15 @@
 ---
-- name: clean-docker-timer-restart
+- name: clean-docker-service
+  ansible.builtin.systemd_service:
+    name: clean-docker.service
+    state: reloaded
+    daemon_reload: true
+  listen: clean-docker-restart
+
+- name: clean-docker-timer
   ansible.builtin.systemd_service:
     name: clean-docker.timer
     state: restarted
     enabled: true
     daemon_reload: true
+  listen: clean-docker-restart

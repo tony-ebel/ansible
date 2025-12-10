@@ -1,0 +1,22 @@
+---
+- name: immich-restart
+  ansible.builtin.systemd_service:
+    name: immich
+    state: restarted
+    enabled: true
+    daemon_reload: true
+
+- name: borg-backup-service
+  ansible.builtin.systemd_service:
+    name: borg-backup.service
+    state: reloaded
+    daemon_reload: true
+  listen: borg-backup-restart
+
+- name: borg-backup-timer
+  ansible.builtin.systemd_service:
+    name: borg-backup.timer
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  listen: borg-backup-restart
