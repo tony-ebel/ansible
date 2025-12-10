@@ -11,4 +11,4 @@
     src: UUID=4e151f98-2d82-49e3-b096-1341057420bb
     fstype: ext4
     opts: rw,realtime
-    state: mounted
+    state: present
