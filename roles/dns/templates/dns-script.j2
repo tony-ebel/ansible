@@ -1,0 +1,16 @@
+#!/bin/bash
+
+wanip=$(curl -s --ipv4 ifconfig.me)
+dns=$(dig @ns1.digitalocean.com +short {{ item.dns_endpoint }})
+
+if [[ "$dns" != "$wanip" ]]; then
+  oauth="{{ vault_do_oauth_token }}"
+  recID="{{ item.dns_record_id }}"
+
+  curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer ${oauth}" \
+    "https://api.digitalocean.com/v2/domains/{{ item.dns_domain }}/records/${recID}" \
+    -d "{ \"data\": \"${wanip}\" }" \
+  && printf "\n\nSuccess\n" || printf "\n\nSomething went wrong...\n"
+fi

@@ -1,0 +1,9 @@
+[Unit]
+Description=DNS update service for {{ item.dns_endpoint }}
+After=network-online.target
+Requires=network-online.target
+AssertPathExists=/root/dns-{{ item.dns_endpoint }}.sh
+
+[Service]
+Type=oneshot
+ExecStart=/root/dns-{{ item.dns_endpoint }}.sh

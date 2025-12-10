@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs script to update {{ item.dns_endpoint }} every hour
+
+[Timer]
+OnUnitActive=1h
+Persistant=true
+RandomSec=300
+
+[Install]
+WantedBy=timers.target

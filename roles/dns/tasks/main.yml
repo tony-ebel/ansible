@@ -1,0 +1,25 @@
+---
+- name: dns scripts
+  ansible.builtin.template:
+    src: dns-script.j2
+    dest: "/root/dns-{{ item.dns_endpoint }}.sh"
+    owner: root
+    mode: "0744"
+  notify: dns-services
+  loop: "{{ dns_records }}"
+
+- name: dns systemd services
+  ansible.builtin.template:
+    src: dns-service.j2
+    dest: "/etc/systemd/system/{{ item.dns_endpoint }}.service"
+    mode: "0644"
+  notify: dns-services
+  loop: "{{ dns_records }}"
+
+- name: dns systemd timers
+  ansible.builtin.template:
+    src: dns-timer.j2
+    dest: "/etc/systemd/system/{{ item.dns_endpoint }}.timer"
+    mode: "0644"
+  notify: dns-services
+  loop: "{{ dns_records }}"

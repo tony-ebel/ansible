@@ -1,0 +1,17 @@
+---
+- name: dns-script-service
+  ansible.builtin.systemd_service:
+    name: "{{ item.dns_endpoint }}.service"
+    state: loaded
+    daemon_reload: true
+  loop: "{{ dns_records }}"
+  listen: dns-services
+
+- name: dns-script-timer
+  ansible.builtin.systemd_service:
+    name: "{{ item.dns_endpoint }}.timer"
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  loop: "{{ dns_records }}"
+  listen: dns-services
