@@ -1,4 +1,10 @@
 ---
+- name: ensure dig installed
+  ansible.builtin.apt:
+    name:
+      - dnsutils
+    state: present
+
 - name: dns scripts
   ansible.builtin.template:
     src: dns-script.j2
