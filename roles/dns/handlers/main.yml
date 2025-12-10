@@ -2,7 +2,7 @@
 - name: dns-script-service
   ansible.builtin.systemd_service:
     name: "{{ item.dns_endpoint }}.service"
-    state: loaded
+    state: reloaded
     daemon_reload: true
   loop: "{{ dns_records }}"
   listen: dns-services
