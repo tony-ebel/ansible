@@ -1,0 +1,14 @@
+---
+- name: ensure borgbackup installed
+  ansible.builtin.apt:
+    name:
+      - borgbackup
+    state: present
+
+- name: ensure backup drive mounted
+  ansible.posix.mount:
+    path: /mnt/immich_backup
+    src: UUID=4e151f98-2d82-49e3-b096-1341057420bb
+    fstype: ext4
+    opts: rw,realtime
+    state: mounted

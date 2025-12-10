@@ -1,0 +1,6 @@
+---
+- hosts: backup
+  become: true
+  gather_facts: false
+  roles:
+    - backup
