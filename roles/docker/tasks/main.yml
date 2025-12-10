@@ -58,9 +58,3 @@
     - clean-docker.service
     - clean-docker.timer
   notify: clean-docker-timer-restart
-
-- name: Enable clean-docker.timer
-  ansible.builtin.systemd_service:
-    name: clean-docker.timer
-    state: started
-    enabled: true
