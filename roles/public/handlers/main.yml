@@ -2,19 +2,14 @@
 - name: sshd-restart
   ansible.builtin.systemd_service:
     name: sshd
+    enabled: true
     state: restarted
+    daemon-reload: true
 
 - name: certbot-timer-restart
   ansible.builtin.systemd_service:
     name: certbot.timer
     state: restarted
-    enabled: true
-    daemon_reload: true
-
-- name: nginx-start
-  ansible.builtin.systemd_service:
-    name: nginx
-    state: started
     enabled: true
     daemon_reload: true
 
@@ -25,10 +20,11 @@
   register: nginx_test_output
   listen: nginx-reload
 
-- name: nginx-reload-service
+- name: nginx-reload
   ansible.builtin.systemd_service:
     name: nginx
     state: reloaded
+    enabled: true
   listen: nginx-reload
 
 - name: portfolio-restart

@@ -34,7 +34,7 @@
       - python3-certbot
       - python3-certbot-nginx
     state: present
-  notify: nginx-start
+  notify: nginx-reload
   tags:
     - certbot-setup
 
@@ -85,14 +85,6 @@
     - certbot.service
     - certbot.timer
   notify: certbot-timer-restart
-  tags:
-    - certbot-setup
-
-- name: enable certbot.timer
-  ansible.builtin.systemd_service:
-    name: certbot.timer
-    state: started
-    enabled: true
   tags:
     - certbot-setup
 
