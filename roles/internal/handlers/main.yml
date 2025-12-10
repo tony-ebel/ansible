@@ -3,10 +3,12 @@
   ansible.builtin.systemd_service:
     name: pihole
     state: restarted
+    enabled: true
     daemon_reload: true
 
 - name: "home-assistant-restart"
   ansible.builtin.systemd_service:
     name: home-assistant
     state: restarted
+    enabled: true
     daemon_reload: true

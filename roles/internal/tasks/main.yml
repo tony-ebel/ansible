@@ -9,16 +9,6 @@
     - pihole
     - home-assistant
 
-- name: ensure services are running and enabled
-  ansible.builtin.systemd_service:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-    daemon_reload: true
-  loop:
-    - pihole
-    - home-assistant
-
 - name: pull latest docker images
   community.docker.docker_image:
     name: "{{ item.image }}"
