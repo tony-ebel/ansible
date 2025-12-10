@@ -1,6 +1,12 @@
 #!/bin/bash
 
-wanip=$(curl -s --ipv4 ifconfig.me)
+wanip=$(curl -s --max-time 10 --ipv4 ifconfig.me)
+
+if [[ -z "$wanip" ]]; then
+  printf "Unable to determine wanip. Exiting without changes.\n"
+  exit 1
+fi
+
 dns=$(dig @ns1.digitalocean.com +short {{ item.dns_endpoint }})
 
 if [[ "$dns" != "$wanip" ]]; then
