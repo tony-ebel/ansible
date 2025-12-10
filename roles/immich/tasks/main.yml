@@ -13,6 +13,20 @@
     mode: "0644"
   notify: immich-restart
 
+- name: ensure borgbackup installed
+  ansible.builtin.apt:
+    name:
+      - borgbackup
+    state: present
+
+- name: ensure backup drive mounted
+  ansible.posix.mount:
+    path: /mnt/immich_backup
+    src: UUID=2e0f863c-5712-49eb-ba07-c88784245db7
+    fstype: ext4
+    opts: rw,relatime
+    state: mounted
+
 - name: immich borg-backup script
   ansible.builtin.copy:
     src: borg-backup.sh
