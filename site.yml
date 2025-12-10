@@ -5,3 +5,4 @@
 - import_playbook: playbooks/internal.yml
 - import_playbook: playbooks/connect.yml
 - import_playbook: playbooks/dns.yml
+- import_playbook: playbooks/backup.yml
