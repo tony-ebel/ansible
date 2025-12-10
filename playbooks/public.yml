@@ -1,6 +1,6 @@
 ---
 - hosts: public
   become: true
-  gather_facts: false
+  gather_facts: true
   roles:
     - public
