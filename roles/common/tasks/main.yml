@@ -37,12 +37,15 @@
     - { key: "PasswordAuthentication", value: "no" }
   notify: sshd-restart
 
-- name: tony bashrc
+- name: tony bashrc and bash_profile
   ansible.builtin.copy:
-    src: tony-bashrc
-    dest: /home/tony/.bashrc
+    src: "{{ item }}"
+    dest: "/home/tony/.{{ item | split('tony-') | last }}"
     mode: "0644"
     owner: tony
+  loop:
+    - tony-bashrc
+    - tony-bash_profile
 
 - name: root bashrc and bash_profile
   ansible.builtin.copy:
