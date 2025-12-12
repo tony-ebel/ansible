@@ -3,11 +3,10 @@
   ansible.builtin.package:
     name:
       - bash-completion
-      - bind9-dnsutils
+      - dnsutils
       - curl
       - git
       - jq
-      - neofetch
       - openssl
       - speedtest-cli
       - tmux
