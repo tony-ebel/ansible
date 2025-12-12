@@ -44,9 +44,12 @@
     mode: "0644"
     owner: tony
 
-- name: root bashrc
+- name: root bashrc and bash_profile
   ansible.builtin.copy:
-    src: root-bashrc
-    dest: /root/.bashrc
+    src: "{{ item }}"
+    dest: "/root/.{{ item | split('root-') | last }}"
     mode: "0644"
     owner: root
+  loop:
+    - root-bashrc
+    - root-bash_profile
