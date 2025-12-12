@@ -13,6 +13,8 @@
       - tmux
       - vim
     state: present
+  tags:
+    - programs
 
 - name: tony user
   ansible.builtin.user:
