@@ -1,4 +1,19 @@
 ---
+- name: essential programs
+  ansible.builtin.package:
+    name:
+      - bash-completion
+      - bind9-dnsutils
+      - curl
+      - git
+      - jq
+      - neofetch
+      - openssl
+      - speedtest-cli
+      - tmux
+      - vim
+    state: present
+
 - name: tony user
   ansible.builtin.user:
     name: tony
