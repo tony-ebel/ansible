@@ -36,3 +36,17 @@
     - { key: "PermitEmptyPasswords", value: "no" }
     - { key: "PasswordAuthentication", value: "no" }
   notify: sshd-restart
+
+- name: tony bashrc
+  ansible.builtin.copy:
+    src: tony-bashrc
+    dest: /home/tony/.bashrc
+    mode: "0644"
+    owner: tony
+
+- name: root bashrc
+  ansible.builtin.copy:
+    src: root-bashrc
+    dest: /root/.bashrc
+    mode: "0644"
+    owner: root
