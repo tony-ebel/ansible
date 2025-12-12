@@ -31,7 +31,7 @@ fi
 
 # bash aliases
 alias genpw='openssl rand -base64 12 | head -c 16; echo'
-alias wanip'curl -s --max-time 10 --ipv4 ifconfig.me; echo'
+alias wanip='curl -s --max-time 10 --ipv4 ifconfig.me; echo'
 
 # bashrc override
 if [ -f ~/.bashrc_override ]; then
