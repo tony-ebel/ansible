@@ -1,0 +1,6 @@
+---
+- hosts: developer
+  become: true
+  gather_facts: false
+  roles:
+    - developer

@@ -1,0 +1,3 @@
+alias vim='nvim'
+
+eval "$(oh-my-posh init --config '~/.config/oh-my-posh/tonydox.omp.json' bash)"

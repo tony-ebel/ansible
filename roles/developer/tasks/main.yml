@@ -1,0 +1,42 @@
+---
+
+- name: Ensure tony local bin dir
+  ansible.builtin.file:
+    path: /home/tony/.local/bin
+    state: directory
+    mode: "0755"
+    owner: tony
+
+- name: Download and run Oh My Posh install script
+  ansible.builtin.shell:
+    cmd: "curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /home/tony/.local/bin && chown tony:tony /home/tony/.local/bin/oh-my-posh"
+    executable: /bin/bash
+  args:
+    creates: "/home/tony/.local/bin/oh-my-posh"
+
+- name: Create custom posh themes dir
+  ansible.builtin.file:
+    path: /home/tony/.config/oh-my-posh
+    state: directory
+    mode: "0755"
+    owner: tony
+
+- name: Install Nerd Fonts
+  ansible.builtin.shell:
+    cmd: oh-my-posh font install FiraCode
+  args:
+    chdir: /home/tony
+
+- name: Copy over custom oh my posh theme
+  ansible.builtin.copy:
+    src: tonydox.omp.json
+    dest: /home/tony/.config/oh-my-posh/tonydox.omp.json
+    mode: "0644"
+    owner: tony
+
+- name: Copy over bashrc override
+  ansible.builtin.copy:
+    src: bashrc_override
+    dest: /home/tony/.bashrc_override
+    mode: "0644"
+    owner: tony

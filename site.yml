@@ -6,3 +6,4 @@
 - import_playbook: playbooks/dns.yml
 - import_playbook: playbooks/immich.yml
 - import_playbook: playbooks/immich_backup.yml
+- import_playbook: playbooks/developer.yml
